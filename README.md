@@ -8,6 +8,6 @@ A challenge during development was balancing movement and collision behavior in 
 
 Through this project, I strengthened my understanding of game design, collision blocks, complex sprite movement, while also learning the significance of user experience, including sprite sizing, positioning, and intuitive controls. Future improvements include adding a start screen and clearer gameplay instructions to guide players through the second section more effectively.
 - [DressAway Game](https://studio.code.org/projects/gamelab/8239b43c-1b5f-4b86-bd29-2550f4b3c619)
-![My Project Logo](assets/dressupgame.pdf): 
+![My Project Logo](assets/dressupgame.pdf)
 - Description
 - Links
