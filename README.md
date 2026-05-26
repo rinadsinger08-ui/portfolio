@@ -1,7 +1,7 @@
 # Portfolio
 
 ## Projects
-### Dressaway Game
+### DressAway Game
 Built an interactive two-stage game focused on sprite interactions, collision mechanics, and responsive player controls. The project features multiple backgrounds, user input systems, non-sprite variables such as health tracking, and more advanced movement logic. One of the main gameplay mechanics involves collision detection using conditional statements and touch-based interactions, allowing the player to bounce off obstacles while losing health.
 
 A challenge during development was balancing movement and collision behavior in the game’s second stage, where players interact with clothing items by clicking them. To solve conflicting movement mechanics, I implemented an `if/else` system combined with sprite position properties to ensure smooth directional controls while maintaining bounce-off collisions.
@@ -19,22 +19,22 @@ The app also includes input validation through helper functions, a recommendatio
 ### Sweet Potato Pie Decider
 - Developed a machine learning–based app that predicts whether sweet potato pie would fit into a Thanksgiving meal based on patterns between traditional side dishes and desserts. The model achieved over 89% accuracy and used existing dataset trends to generate predictions based on user selections.
 Through testing and analysis, I identified a major limitation in the dataset: a significant imbalance between “Yes” and “No” responses, causing the model to predict “No” far more frequently despite matching patterns in the positive data. This project strengthened my understanding of AI bias, dataset imbalance, prediction reliability, and the importance of diverse training data in machine learning applications.
-Future improvements include retraining the model with more balanced and diverse datasets, potentially using alternative food categories such as apple pie to improve prediction variety, usefulness, user experience, etc.
+Future improvements include retraining the model with more balanced and diverse datasets, potentially using alternative food categories such as apple pie to improve prediction variety, usefulness, user experience.
 - [Sweet Potato Pie Decider App](https://studio.code.org/projects/applab/281379ab-cfb8-40da-9d47-d800d418f71e)
 - ![SPPDA](docs/assets/SPPDA.jpeg)
 
-### Flappybird Game
+### Flappy Bird Game
 - Built a 2D flying-style arcade game featuring sprite-based movement, obstacle interactions, and collectible mechanics. The player controls a flying character using keyboard inputs while navigating gravity-based movement to collect coins and avoid moving obstacles.
 The game includes collision detection where obstacles push the player away, a coin system with randomized respawn positions, and boundary-based game-over conditions that challenge player control and precision.
 A challenge during development was balancing the gravity and jump mechanics, as the player initially moved too quickly and was difficult to control. Adjusting these values improved responsiveness & made the gameplay more manageable.
 Through this project, I strengthened my understanding of sprite physics, conditional statements, user input handling, game design balance, and more.
-- [Flappybird Game](https://studio.code.org/projects/gamelab/613ee2e4-28d3-4039-b023-22bcad02530e)
+- [Flappy Bird Game](https://studio.code.org/projects/gamelab/613ee2e4-28d3-4039-b023-22bcad02530e)
 - ![FBG](docs/assets/FBG.jpeg)
 
 ### Sidescroller Game
 - Built a 2D arcade-style game featuring sprite movement, collision detection, scoring, and a health system. The player controls an “Angry Bird” character that must avoid obstacles while collecting targets to increase score.
 The game includes interactive sprite behaviors where collisions with obstacles reduce health & trigger visual feedback, whereas collecting targets increases score & resets their position. It also features a simple jump mechanic with constrained movement, along with looping obstacles and collectibles that re-enter the screen to allow continuous gameplay.
-A key challenge during development was balancing movement mechanics, especially the jump system, to ensure the player could control vertical motion without becoming too difficult or inconsistent. As a result, this helped expand my understanding gameplay balancing.
+A key challenge during development was balancing movement mechanics, especially the jump system, to ensure the player could control vertical motion without becoming too difficult or inconsistent. As a result, this helped expand my understanding of gameplay balancing.
 Through this project, I mostly strengthened my skills in game design, real-time input, and managing multiple game states such as score tracking and game over conditions.
 - [Sidescroller Game](https://studio.code.org/projects/gamelab/96be2aff-83ab-4340-888d-477458c7a219)
 - ![SSG](docs/assets/SSG.jpeg)
@@ -54,16 +54,16 @@ Through this project, I learned how to use randomNumber() to control positioning
 - [Random Robot Face Generator](https://studio.code.org/projects/gamelab/4435b80e-5bb5-4e66-a66a-f43698a2c3f7)
 - ![Robot](docs/assets/Robot.jpeg)
 
-### Wild Guardian Site
+### Wild Guardian Website 
 - Developed an informational website focused on endangered species and wildlife conservation using HTML and CSS. The site features organized sections highlighting featured species, conservation efforts, and a gallery displaying animal images and population statistics.
 The project included creating structured layouts with containers, lists, image cards, and styled content sections to improve readability and presentation. A challenge during development was organizing the page layout and balancing the visual design of elements such as galleries, spacing, and image placement.
 Through this project, I widened my knowledge on webpage structure, HTML organization, CSS styling, & responsive design concepts while also improving my ability to create visually engaging and informative websites on nuanced topics. It was a new and first experience as I am usually used to working on mobile-formatted games.
 - [Wild Gaurdian Website](https://codeprojects.org/projects/weblab/d3dcaff2-4c73-4bf8-ad0c-93ea9af13ff3/)
 - ![WGS](docs/assets/WGS.jpeg)
 
-### Climate Change Site
+### Climate Change Website
 - Created a multi-page website about climate change and global warming using HTML and CSS. The site focuses on spreading awareness about environmental issues as well as encouraging people to make small lifestyle changes that can help reduce their impact on the planet.
 The website includes connected pages covering recent and current climate-related events, explanations of climate change, and practical solutions people can apply in daily life. During development, I improved the site’s appearance by adding CSS styling such as borders, spacing, and padding to make the layout easier for users to read.
-One part I was especially proud of was the “Action” page, where I used reusable image-card designs and div classes to organize information in a more visually appealing way. Through this project, I improved my skills with HTML page structure, CSS styling, curating websites in an informative and user-friendly way.
+One part I was especially proud of was the “Action” page, where I used reusable image-card designs and div classes to organize information in a more visually appealing way. Through this project, I improved my skills with HTML page structure, CSS styling, curating websites in an informative and a user-friendly way.
 - [Climate Change Awareness Website](https://codeprojects.org/projects/weblab/9b2d628b-d7ef-452d-b2ad-7b9002ff5a01/index.html)
 - ![CC](docs/assets/CC.jpeg)
