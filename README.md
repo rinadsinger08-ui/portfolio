@@ -53,3 +53,10 @@ One of the main features was using variables with randomized RGB values to chang
 Through this project, I learned how to use randomNumber() to control positioning, sizing, and color generation, while improving my understanding of variables and shape customization. Future improvements include preventing overlapping orbit shapes and refining the triangle designs inside the robot’s wheels.
 - [Random Robot Face Generator](https://studio.code.org/projects/gamelab/4435b80e-5bb5-4e66-a66a-f43698a2c3f7)
 - ![Robot](docs/assets/Robot.jpeg)
+
+### Wild Guardian Site
+- Developed an informational website focused on endangered species and wildlife conservation using HTML and CSS. The site features organized sections highlighting featured species, conservation efforts, and a gallery displaying animal images and population statistics.
+The project included creating structured layouts with containers, lists, image cards, and styled content sections to improve readability and presentation. A challenge during development was organizing the page layout and balancing the visual design of elements such as galleries, spacing, and image placement.
+Through this project, I widened my knowledge on webpage structure, HTML organization, CSS styling, & responsive design concepts while also improving my ability to create visually engaging and informative websites on nuanced topics.
+- [Wild Gaurdian Website](https://codeprojects.org/projects/weblab/d3dcaff2-4c73-4bf8-ad0c-93ea9af13ff3/)
+- ![WGS](docs/assets/WGS.jpeg)
