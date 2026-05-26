@@ -60,3 +60,10 @@ The project included creating structured layouts with containers, lists, image c
 Through this project, I widened my knowledge on webpage structure, HTML organization, CSS styling, & responsive design concepts while also improving my ability to create visually engaging and informative websites on nuanced topics. It was a new and first experience as I am usually used to working on mobile-formatted games.
 - [Wild Gaurdian Website](https://codeprojects.org/projects/weblab/d3dcaff2-4c73-4bf8-ad0c-93ea9af13ff3/)
 - ![WGS](docs/assets/WGS.jpeg)
+
+### Climate Change Site
+- Created a multi-page website about climate change and global warming using HTML and CSS. The site focuses on spreading awareness about environmental issues as well as encouraging people to make small lifestyle changes that can help reduce their impact on the planet.
+The website includes connected pages covering recent and current climate-related events, explanations of climate change, and practical solutions people can apply in daily life. During development, I improved the site’s appearance by adding CSS styling such as borders, spacing, and padding to make the layout easier for users to read.
+One part I was especially proud of was the “Action” page, where I used reusable image-card designs and div classes to organize information in a more visually appealing way. Through this project, I improved my skills with HTML page structure, CSS styling, curating websites in an informative and user-friendly way.
+- [Climate Change Awareness Website](https://codeprojects.org/projects/weblab/9b2d628b-d7ef-452d-b2ad-7b9002ff5a01/index.html)
+- ![CC](docs/assets/CC.jpeg)
