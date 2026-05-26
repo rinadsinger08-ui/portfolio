@@ -23,4 +23,12 @@ Future improvements include retraining the model with more balanced and diverse 
 - [Sweet Potato Pie Decider App](https://studio.code.org/projects/applab/281379ab-cfb8-40da-9d47-d800d418f71e)
 - ![SPPDA](docs/assets/SPPDA.jpeg)
 
+### Flappybird Game
+- Built a 2D flying-style arcade game featuring sprite-based movement, obstacle interactions, and collectible mechanics. The player controls a flying character using keyboard inputs while navigating gravity-based movement to collect coins and avoid moving obstacles.
+The game includes collision detection where obstacles push the player away, a coin system with randomized respawn positions, and boundary-based game-over conditions that challenge player control and precision.
+A challenge during development was balancing the gravity and jump mechanics, as the player initially moved too quickly and was difficult to control. Adjusting these values improved responsiveness & made the gameplay more manageable.
+Through this project, I strengthened my understanding of sprite physics, conditional statements, user input handling, game design balance, and more.
+- [Flappybird Game](https://studio.code.org/projects/gamelab/613ee2e4-28d3-4039-b023-22bcad02530e)
+- ![FBG](docs/assets/FBG.jpeg)
+
 
