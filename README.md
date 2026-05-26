@@ -13,4 +13,4 @@ Through this project, I strengthened my understanding of game design, collision 
 - Developed an interactive pet recommendation app that suggests suitable pets based on the user’s home size, available time, and budget using nested conditional logic. The program displays personalized recommendations with matching text and images while considering realistic pet care needs and lifestyle factors.
 The app also includes input validation through helper functions, a recommendation history list built with iteration, duplicate checking to prevent repeated results, and reset/restart features for a smoother user experience. Through this project, I strengthened my understanding of conditional statements, procedures, lists, iteration, input validation, and program organization while improving my ability to design user-friendly applications.
 - [Pet Decider App](https://studio.code.org/projects/applab/04740d0a-0e30-4312-8bb1-6bf43aa63074)
-- ![Pet Decider App](docs/assets/petrecapp.pdf)
+- ![Pet Decider App](docs/assets/petrecapp.jpeg)
