@@ -67,11 +67,3 @@ The website includes connected pages covering recent and current climate-related
 One part I was especially proud of was the “Action” page, where I used reusable image-card designs and div classes to organize information in a more visually appealing way. Through this project, I improved my skills with HTML page structure, CSS styling, curating websites in an informative and user-friendly way.
 - [Climate Change Awareness Website](https://codeprojects.org/projects/weblab/9b2d628b-d7ef-452d-b2ad-7b9002ff5a01/index.html)
 - ![CC](docs/assets/CC.jpeg)
-
-<head>
-  <style>
-    a {
-      font-size: 24px;
-    }
-  </style>
-</head>
