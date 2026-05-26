@@ -31,4 +31,11 @@ Through this project, I strengthened my understanding of sprite physics, conditi
 - [Flappybird Game](https://studio.code.org/projects/gamelab/613ee2e4-28d3-4039-b023-22bcad02530e)
 - ![FBG](docs/assets/FBG.jpeg)
 
+### Sidescroller Game
+- Built a 2D arcade-style game featuring sprite movement, collision detection, scoring, and a health system. The player controls an “Angry Bird” character that must avoid obstacles while collecting targets to increase score.
+The game includes interactive sprite behaviors where collisions with obstacles reduce health & trigger visual feedback, whereas collecting targets increases score & resets their position. It also features a simple jump mechanic with constrained movement, along with looping obstacles and collectibles that re-enter the screen to allow continuous gameplay.
+A key challenge during development was balancing movement mechanics, especially the jump system, to ensure the player could control vertical motion without becoming too difficult or inconsistent. As a result, this helped expand my understanding gameplay balancing.
+Through this project, I mostly strengthened my skills in game design, real-time input, and managing multiple game states such as score tracking and game over conditions.
+- [Sidescroller Game](https://studio.code.org/projects/gamelab/96be2aff-83ab-4340-888d-477458c7a219)
+- ![SSG](docs/assets/SSG.jpeg)
 
