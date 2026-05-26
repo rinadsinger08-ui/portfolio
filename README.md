@@ -46,3 +46,10 @@ A challenge I ran into was that clicks were being counted multiple times per sin
 Through this project, I learned how to use non-sprite variables, update sprite properties in real time, and handle user input more accurately while debugging interaction issues.
 - [Interactive Card](https://studio.code.org/projects/gamelab/6986f6ac-3b16-4f20-8d83-ce681bfe0635)
 - ![IC](docs/assets/IC.jpeg)
+
+### Robot Face Randomizer
+- Created a unique robot face using shapes, variables, RGB values, and the randomNumber() function. The project generates different colors, sizes, and positions each time the program is refreshed, making every version of the robot unique.
+One of the main features was using variables with randomized RGB values to change the colors of the robot’s components dynamically. A challenge during development was adjusting angles and parameters for shapes like arcs and triangles to create the design I wanted while still keeping the randomized elements visually balanced.
+Through this project, I learned how to use randomNumber() to control positioning, sizing, and color generation, while improving my understanding of variables and shape customization. Future improvements include preventing overlapping orbit shapes and refining the triangle designs inside the robot’s wheels.
+- [Random Robot Face Generator](https://studio.code.org/projects/gamelab/4435b80e-5bb5-4e66-a66a-f43698a2c3f7)
+- ![Robot](docs/assets/Robot.jpeg)
