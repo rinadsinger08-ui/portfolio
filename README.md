@@ -21,6 +21,6 @@ The app also includes input validation through helper functions, a recommendatio
 Through testing and analysis, I identified a major limitation in the dataset: a significant imbalance between “Yes” and “No” responses, causing the model to predict “No” far more frequently despite matching patterns in the positive data. This project strengthened my understanding of AI bias, dataset imbalance, prediction reliability, and the importance of diverse training data in machine learning applications.
 Future improvements include retraining the model with more balanced and diverse datasets, potentially using alternative food categories such as apple pie to improve prediction variety, usefulness, user experience, etc.
 - [Sweet Potato Pie Decider App](https://studio.code.org/projects/applab/281379ab-cfb8-40da-9d47-d800d418f71e)
-- ![SPPDA](docs/assets/petrecapp.jpeg)
+- ![SPPDA](docs/assets/SPPDA.jpeg)
 
 
