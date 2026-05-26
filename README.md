@@ -39,3 +39,10 @@ Through this project, I mostly strengthened my skills in game design, real-time 
 - [Sidescroller Game](https://studio.code.org/projects/gamelab/96be2aff-83ab-4340-888d-477458c7a219)
 - ![SSG](docs/assets/SSG.jpeg)
 
+### Halloween Interactive Card
+- Built an interactive card game using sprites, conditional statements, and non-sprite variables. The project includes multiple sprites that update during the draw loop with random movement and changing properties, along with user interaction through mouse clicks.
+The game uses two main variables, clicks and total candies, to track player progress. Clicks increase when the user interacts with sprites, and conditional logic changes the game state once clicks exceed the total number of candies, including switching sprite visibility.
+A challenge I ran into was that clicks were being counted multiple times per single press. I fixed this by improving the mouse input logic using proper conditions to ensure each click was only registered once.
+Through this project, I learned how to use non-sprite variables, update sprite properties in real time, and handle user input more accurately while debugging interaction issues.
+- [Interactive Card](https://studio.code.org/projects/gamelab/6986f6ac-3b16-4f20-8d83-ce681bfe0635)
+- ![IC](docs/assets/IC.jpeg)
