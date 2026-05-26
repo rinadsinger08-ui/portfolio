@@ -15,3 +15,12 @@ Through this project, I strengthened my understanding of game design, collision 
 The app also includes input validation through helper functions, a recommendation history list built with iteration, duplicate checking to prevent repeated results, and reset/restart features for a smoother user experience. Through this project, I strengthened my understanding of conditional statements, procedures, lists, iteration, input validation, and program organization while improving my ability to design user-friendly applications.
 - [Pet Decider App](https://studio.code.org/projects/applab/04740d0a-0e30-4312-8bb1-6bf43aa63074)
 - ![Pet Decider App](docs/assets/petrecapp.jpeg)
+
+### Sweet Potato Pie Decider
+- Developed a machine learning–based app that predicts whether sweet potato pie would fit into a Thanksgiving meal based on patterns between traditional side dishes and desserts. The model achieved over 89% accuracy and used existing dataset trends to generate predictions based on user selections.
+Through testing and analysis, I identified a major limitation in the dataset: a significant imbalance between “Yes” and “No” responses, causing the model to predict “No” far more frequently despite matching patterns in the positive data. This project strengthened my understanding of AI bias, dataset imbalance, prediction reliability, and the importance of diverse training data in machine learning applications.
+Future improvements include retraining the model with more balanced and diverse datasets, potentially using alternative food categories such as apple pie to improve prediction variety, usefulness, user experience, etc.
+- [Sweet Potato Pie Decider App](https://studio.code.org/projects/applab/281379ab-cfb8-40da-9d47-d800d418f71e)
+- ![SPPDA](docs/assets/petrecapp.jpeg)
+
+
