@@ -1,0 +1,99 @@
+/* ADD NEEDED RULE SETS AND PROPERTIES BELOW */
+
+/* style for title and introduction */
+
+.gaurdian {
+  text-align: center;
+    color: white;
+  font-size: 16px;
+  padding: 20px;
+  background-color: rgb(34, 139, 34)
+    
+}
+
+/* style for the featured species and conservation efforts */
+
+.featured {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  height: 200px;
+  background-color: #ffe7c0
+
+}
+
+/* style for the content inside the featured container */
+
+.content {
+  width: 40%;
+
+}
+
+
+/* gallery style */
+.gallery {
+display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+
+/* style for each animal info card */
+.animal-card {
+  width: 250px;
+  height: 300px;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: #b7b1b1;
+  
+}
+
+/* style for the paragraph text in the animal info card */
+.animal-card p { 
+  margin-top: 0px;
+  padding-top: 0px;
+  margin-bottom: 5px; 
+}
+
+
+
+/* style for the footer containing the images credit */
+.credit {
+  color: white;
+  background-color: rgb(34, 139, 34);
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* DO NOT EDIT CSS CODE BELOW */
+
+/* body style */
+body {
+  font-family: Verdana, sans-serif;
+}
+
+/* h2 style */
+h2 {
+  color: #003E1F;
+}
+
+/* h3 style */
+h3 {
+  color: #053C5E;
+  margin-bottom: 10px;
+}
+
+/* style for images */
+img {
+  width: auto;
+  height: 200px;
+  border: 2px solid #003E1F;
+}
