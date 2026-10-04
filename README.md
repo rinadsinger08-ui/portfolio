@@ -30,7 +30,7 @@ The matching model uses explicit planning assumptions, not AI or a guarantee of 
 | Wild Guardian | Conservation website with species cards and an image gallery. | [Code](projects/legacy/wild-guardian/) · [Visit](https://codeprojects.org/projects/weblab/d3dcaff2-4c73-4bf8-ad0c-93ea9af13ff3/) |
 | Climate Change | Multi-page awareness website with reusable content and action cards. | [Code](projects/legacy/climate-change/) · [Visit](https://codeprojects.org/projects/weblab/9b2d628b-d7ef-452d-b2ad-7b9002ff5a01/index.html) |
 
-Original snapshots preserve the actual code and available design metadata. Code.org app/game APIs, media, and hosted AI models still require the platform; their linked demos remain the place to run them.
+Original snapshots preserve the actual readable code. Code.org app/game APIs, design metadata, media, and hosted AI models still require the platform; their linked demos remain the place to run them.
 
 ## Run locally
 
