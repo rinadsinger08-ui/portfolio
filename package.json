@@ -7,9 +7,12 @@
   "scripts": {
     "test": "node --test projects/pet-decider/tests/*.test.js",
     "start": "node scripts/serve.js",
-    "test:browser": "node scripts/browser-checks.cjs"
+    "test:browser": "playwright test"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
   }
 }

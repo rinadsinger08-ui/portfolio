@@ -3,3 +3,8 @@ coverage/
 test-results/
 .DS_Store
 *.log
+
+playwright-report/
+*.aux
+*.out
+resume/*.pdf

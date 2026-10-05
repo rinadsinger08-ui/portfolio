@@ -47,9 +47,9 @@ async function submit(page){await page.getByRole('button',{name:'Explore my matc
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  await page.screenshot({path:qaDir+'/pet-mobile.png',fullPage:true});
  await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:qaDir+'/pet-desktop.png',fullPage:true});
- await page.goto(origin+'/');assert.equal(await page.getByRole('link',{name:'Try the app'}).count(),1);
+ await page.goto(origin+'/');assert.equal(await page.getByRole('link',{name:'Try the app'}).count(),1);assert.equal(await page.getByRole('link',{name:'Resume ↗',exact:true}).count(),1);assert.equal(await page.getByRole('link',{name:'Case study ↗',exact:true}).count(),1);
  await page.screenshot({path:qaDir+'/portfolio-desktop.png',fullPage:true});
  await page.setViewportSize({width:375,height:812});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:qaDir+'/portfolio-mobile.png',fullPage:true});
- console.log('PASS portfolio and app mobile layouts have no page overflow');
+ await page.goto(origin+'/projects/dewaecoapp/');assert.equal(await page.getByRole('heading',{name:'DEWAEcoApp',exact:true}).count(),1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:qaDir+'/dewa-mobile.png',fullPage:true});await page.goto(origin+'/resume/');assert.equal(await page.getByRole('link',{name:'Download PDF',exact:true}).count(),1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);console.log('PASS portfolio, case study, resume and app mobile layouts have no page overflow');
  assert.deepEqual(errors,[]);console.log('PASS no browser JavaScript errors');await browser.close();
 })().catch(error=>{console.error(error);process.exit(1);});

@@ -44,9 +44,9 @@ Qualitative care notes are informed by the RSPCA's [cat](https://www.rspca.org.u
 - Corrupted records are skipped. Denied storage or quota errors preserve session functionality with a visible message.
 - Saved profiles are revalidated and results recomputed on revisit. Dynamic text uses `textContent`, not HTML interpolation.
 
-Tests include a 1,512-profile sweep asserting that no result fails a hard constraint. GitHub Actions runs the Node tests on pushes and pull requests.
+Tests include a 1,512-profile sweep asserting that no result fails a hard constraint. This is one test that checks 1,512 input profiles, not 1,512 separate tests. GitHub Actions runs the Node tests and browser checks on pushes and pull requests.
 
-Optional browser checks cover validation, comparison, history, stale results, corrupted/denied storage, and desktop/mobile layout. With the local server running, install the test-only tool using `npm install --no-save --package-lock=false playwright`, run `npx playwright install chromium`, then `npm run test:browser`. Screenshots go to ignored `test-results/`. The app itself has no dependencies.
+Browser checks cover validation, comparison, history, stale results, corrupted/denied storage, and desktop/mobile layout. Run `npm ci`, `npx playwright install chromium`, then `npm run test:browser`. Playwright starts and stops the local server automatically. Screenshots go to ignored `test-results/`. The browser app has no runtime dependencies; Playwright is a pinned development dependency. Node.js supplies testing and local static serving, not an application backend.
 
 ## Files
 
@@ -58,4 +58,4 @@ Optional browser checks cover validation, comparison, history, stale results, co
 | `src/app.js` | DOM rendering and events |
 | `tests/` | Engine and history regression checks |
 
-Possible extensions: regional cost data with provenance, shelter-specific assessments, a larger catalog, and automated browser checks in CI. These are future work, not current features.
+Possible extensions: regional cost data with provenance, shelter-specific assessments, and a larger catalog. These are future work, not current features.

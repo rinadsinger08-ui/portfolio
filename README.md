@@ -1,8 +1,10 @@
 # Rinad Singer · Projects
 
-McGill student interested in computer science, thoughtful interfaces, and interactive experiences.
+Computer Science student at McGill University, expected May 2029. Seeking Summer 2027 software development, front-end, and software testing internships.
 
-**Stack:** JavaScript · HTML · CSS · Python (current coursework)
+**Stack:** JavaScript · React · TypeScript · Tailwind CSS · HTML · CSS · Python (current coursework)
+
+[Portfolio](https://rinadsinger08-ui.github.io/portfolio/) · [Resume](https://rinadsinger08-ui.github.io/portfolio/resume/) · [LinkedIn](https://www.linkedin.com/in/rinad-singer/) · [Contact](mailto:rinadsinger08@gmail.com)
 
 ## Featured: Pet Decider
 
@@ -16,6 +18,12 @@ A standalone JavaScript web app rebuilt from my original App Lab project.
 [Try the web app](https://rinadsinger08-ui.github.io/portfolio/projects/pet-decider/) · [Source](projects/pet-decider/src/) · [Tests](projects/pet-decider/tests/) · [Model & limitations](projects/pet-decider/README.md) · [Original App Lab source](projects/legacy/pet-decider/main.js)
 
 The matching model uses explicit planning assumptions, not AI or a guarantee of adoption suitability.
+
+## DEWAEcoApp
+
+React / TypeScript sustainability prototype with interactive product entry and monthly, annual, and five-year water-cost comparisons. Receipt scanning and retailer verification are simulated concepts; missing support files are documented.
+
+[Case study](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/) · [Source snapshot](projects/dewaecoapp/source/App.tsx)
 
 ## Earlier projects
 
@@ -34,12 +42,17 @@ Original snapshots preserve the actual readable code. Code.org app/game APIs, de
 
 ## Run locally
 
-Requires Node.js 20+; no dependencies or build step.
+Requires Node.js 20+. The browser applications need no build step; development dependencies are pinned for reproducible browser tests.
 
 ```sh
 npm start
 # Open http://127.0.0.1:3000/
 npm test
+npm ci
+npx playwright install chromium
+npm run test:browser
 ```
 
 [Portfolio website](https://rinadsinger08-ui.github.io/portfolio/) · [Source archive notes](projects/legacy/README.md)
+
+GitHub Actions runs both matching/storage tests and browser regression checks. The constraint sweep checks 1,512 input profiles within one test, not 1,512 separate tests. Node.js is used for tests and local static serving; Pet Decider has no Node backend.
