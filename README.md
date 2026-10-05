@@ -21,7 +21,7 @@ The matching model uses explicit planning assumptions, not AI or a guarantee of 
 
 ## DEWAEcoApp
 
-React / TypeScript sustainability prototype with interactive product entry and monthly, annual, and five-year water-cost comparisons. Receipt scanning and retailer verification are simulated concepts; missing support files are documented.
+React / TypeScript sustainability prototype with interactive product entry and monthly, annual, and five-year water-cost comparisons. The proposed rewards model gives DEWA points for sustainable-labelled purchases or substitutes, and for lower water/electricity consumption compared with the previous month's bill. Receipt and retailer flows are simulated; bill comparison and real point issuance are not established by the recovered source.
 
 [Case study](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/) · [Source snapshot](projects/dewaecoapp/source/App.tsx)
 
