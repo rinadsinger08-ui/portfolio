@@ -30,7 +30,7 @@ The cost model assumes 30 days per month and 12 months per year. Flow rates are 
 
 ## Contribution and deliverable
 
-Built the React / TypeScript calculator interface, cost comparisons, and state-driven product interactions. Prototyped conservation-reward and partner-account flows as part of the broader sustainability concept. The source is preserved as recovered; the case-study page documents its actual behavior rather than filling in unavailable original code.
+Originated the DEWA points rewards concept: sustainable-labelled purchases or recommended substitutes earn points, and scanned utility bills are compared month to month to reward reduced water or electricity consumption. Built the React / TypeScript calculator interface, cost comparisons, and state-driven product interactions, and prototyped receipt and partner-account reward flows with simulated data. The source is preserved as recovered; the case-study page documents its actual behavior rather than filling in unavailable original code.
 
 ## Next work
 
