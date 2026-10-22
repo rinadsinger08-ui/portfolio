@@ -2,7 +2,7 @@
 
 A sustainability web project originally developed for the DIDI Design Competition (December 2024–June 2025), exploring practical ways to reduce household water/electricity use and compare efficient products.
 
-**[Try the interactive application](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/app/)** · **[Project case study](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/)** · **[Published app source](app/)** · **[Original React calculator source](source/)**
+**[Try the interactive application](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/app/)** · **[Project case study](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/)** · **[React/TypeScript hybrid + tests](react-hybrid/)** · **[Published JavaScript app source](app/)** · **[Original React calculator snapshot](source/)**
 
 ## Features available in the interactive app
 
@@ -23,8 +23,9 @@ Bill images are processed in the browser by an OCR library loaded on demand from
 
 ## Architecture
 
-- `app/`: public static HTML, CSS and JavaScript client, deployed through GitHub Pages without a build step
-- `source/`: the original React / TypeScript water calculator plus supporting project setup
+- `app/`: the currently published, browser-tested build-free JavaScript client; this is **not the React build**
+- `react-hybrid/`: recovered and expanded React/TypeScript code split into components, typed calculation utilities, OCR helpers and tests, preserving the original project files under `reference/`. Source tests pass but full Vite build is not verified in this environment.
+- `source/`: initial React / TypeScript calculator snapshot plus project setup
 - The separately published Bolt Utility Tracker informed the user-interface and tracking workflow, but the public static preview is not the same codebase as that Bolt deployment
 
 ## Prior technical work
