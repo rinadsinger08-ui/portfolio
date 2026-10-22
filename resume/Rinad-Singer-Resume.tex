@@ -1,6 +1,31 @@
 %-------------------------
 % Resume in LaTeX
-%------------------------
+% Template author: Jake Gutierrez
+% Based on: https://github.com/sb2nov/resume
+% Template source: https://github.com/jakegut/resume
+% Adapted for Rinad Singer. Compile with pdfLaTeX.
+%
+% MIT License
+% Copyright (c) 2020 Jake Gutierrez
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+%-------------------------
 
 \documentclass[letterpaper,11pt]{article}
 
@@ -17,24 +42,19 @@
 \usepackage{tabularx}
 \input{glyphtounicode}
 
-%----------FONT OPTIONS----------
-% sans-serif
-% \usepackage[sfdefault]{FiraSans}
-% \usepackage[sfdefault]{roboto}
-% \usepackage[sfdefault]{noto-sans}
-% \usepackage[default]{sourcesanspro}
+\hypersetup{
+  pdftitle={Rinad Singer - Resume},
+  pdfauthor={Rinad Singer}
+}
 
-% serif
-% \usepackage{CormorantGaramond}
-% \usepackage{charter}
-
+% Jake's original template uses the default Computer Modern font.
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Adjust margins
+% Original template margins.
 \addtolength{\oddsidemargin}{-0.5in}
 \addtolength{\evensidemargin}{-0.5in}
 \addtolength{\textwidth}{1in}
@@ -42,22 +62,19 @@
 \addtolength{\textheight}{1.0in}
 
 \urlstyle{same}
-
 \raggedbottom
 \raggedright
 \setlength{\tabcolsep}{0in}
 
-% Sections formatting
+% Original template section formatting.
 \titleformat{\section}{
   \vspace{-4pt}\scshape\raggedright\large
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
-% Ensure PDF is machine readable / ATS parsable
+% Enable Unicode text extraction in PDFs generated with pdfLaTeX.
 \pdfgentounicode=1
 
-%-------------------------
-% Custom commands
-
+% Original template commands.
 \newcommand{\resumeItem}[1]{
   \item\small{
     {#1 \vspace{-2pt}}
@@ -66,129 +83,120 @@
 
 \newcommand{\resumeSubheading}[4]{
   \vspace{-2pt}\item
-  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-    \textbf{#1} & #2 \\
-    \textit{\small#3} & \textit{\small #4} \\
-  \end{tabular*}\vspace{-7pt}
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
 }
 
 \newcommand{\resumeSubSubheading}[2]{
-  \item
-  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-    \textit{\small#1} & \textit{\small #2} \\
-  \end{tabular*}\vspace{-7pt}
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
 }
 
 \newcommand{\resumeProjectHeading}[2]{
-  \item
-  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-    \small#1 & #2 \\
-  \end{tabular*}\vspace{-7pt}
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
 }
 
 \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
-
-\newcommand{\resumeSubHeadingListStart}{
-  \begin{itemize}[leftmargin=0.15in, label={}]
-}
-
-\newcommand{\resumeSubHeadingListEnd}{
-  \end{itemize}
-}
-
-\newcommand{\resumeItemListStart}{
-  \begin{itemize}
-}
-
-\newcommand{\resumeItemListEnd}{
-  \end{itemize}\vspace{-5pt}
-}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
 %-------------------------------------------
-%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{document}
 
 %----------HEADING----------
 \begin{center}
-  \textbf{\Huge \scshape Rinad Singer} \\ \vspace{1pt}
-  \small
-  514-296-6731 $|$
-  \href{mailto:rinadsinger08@gmail.com}{\underline{rinadsinger08@gmail.com}} $|$
-  \href{https://www.linkedin.com/in/rinad-singer}{\underline{LinkedIn}} $|$
-  \href{https://github.com/rinadsinger08-ui/portfolio}{\underline{GitHub}} $|$
-  \href{https://rinadsinger08-ui.github.io/portfolio/}{\underline{Portfolio}}
+    \textbf{\Huge \scshape Rinad Singer} \\ \vspace{1pt}
+    \small 514-296-6731 $|$
+    \href{mailto:rinadsinger08@gmail.com}{\underline{rinadsinger08@gmail.com}} $|$
+    \href{https://www.linkedin.com/in/rinad-singer/}{\underline{linkedin.com/in/rinad-singer}} \\
+    \href{https://github.com/rinadsinger08-ui}{\underline{github.com/rinadsinger08-ui}} $|$
+    \href{https://rinadsinger08-ui.github.io/portfolio/}{\underline{rinadsinger08-ui.github.io/portfolio}}
 \end{center}
 
 %-----------EDUCATION-----------
 \section{Education}
-\resumeSubHeadingListStart
-  \resumeSubheading
-    {McGill University}{Montreal, QC}
-    {Bachelor of Arts in Computer Science}{Expected May 2029}
-    \resumeItemListStart
-      \resumeItem{\textbf{Coursework:} In progress -- Programming (Python), Linear Algebra, Calculus I; planned -- Intro CS, Calculus II.}
-    \resumeItemListEnd
-\resumeSubHeadingListEnd
-
-%-----------TECHNICAL SKILLS-----------
-\section{Technical Skills}
-\begin{itemize}[leftmargin=0.15in, label={}]
-  \small{\item{
-    \textbf{Languages:} Python, JavaScript, TypeScript, HTML, CSS \\
-    \textbf{Frameworks \& Tools:} React, Tailwind CSS, Git, Code.org Game Lab \\
-    \textbf{Testing:} Node.js test runner, Playwright browser checks, GitHub Actions
-  }}
-\end{itemize}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {McGill University}{Montreal, QC}
+      {Bachelor of Arts in Computer Science}{Expected 2028}
+  \resumeSubHeadingListEnd
 
 %-----------PROJECTS-----------
 \section{Projects}
-\resumeSubHeadingListStart
-  \resumeProjectHeading
-    {\textbf{Pet Decider} $|$ \emph{JavaScript, HTML, CSS} $|$ \href{https://rinadsinger08-ui.github.io/portfolio/projects/pet-decider/}{\underline{Demo}} / \href{https://github.com/rinadsinger08-ui/portfolio/tree/main/projects/pet-decider}{\underline{Code}}}
-    {Apr 2026 -- Sep 2026}
-    \resumeItemListStart
-      \resumeItem{Built and deployed a JavaScript application that filters and ranks four pet-care options using nine inputs, with match explanations and side-by-side comparisons.}
-      \resumeItem{Separated matching logic, UI, and local storage into modules; implemented input validation, duplicate prevention, and recovery from unavailable storage.}
-      \resumeItem{Added automated matching and storage tests, including a 1,512-profile constraint sweep, with Node tests and browser checks running in GitHub Actions.}
-    \resumeItemListEnd
+  \resumeSubHeadingListStart
+    \resumeProjectHeading
+      {\textbf{\href{https://github.com/rinadsinger08-ui/portfolio/tree/main/projects/pet-decider}{Pet Decider}} $|$ \emph{JavaScript, HTML, CSS} $|$ \href{https://rinadsinger08-ui.github.io/portfolio/projects/pet-decider/}{\underline{Demo}}}{Apr. 2026 -- Oct. 2026}
+      \resumeItemListStart
+        \resumeItem{Built and deployed a web application that filters and ranks four pet-care options using nine user inputs, with match explanations and side-by-side comparisons}
+        \resumeItem{Separated matching logic, interface, and local storage into modules; implemented input validation, duplicate prevention, and recovery from unavailable storage}
+        \resumeItem{Implemented field-level error states, focusable validation summaries, and ARIA live announcements for updated match results}
+        \resumeItem{Added automated matching and storage tests, including a 1,512-profile constraint sweep; configured Node.js tests and Playwright browser checks in GitHub Actions}
+      \resumeItemListEnd
 
-  \resumeProjectHeading
-    {\textbf{DEWAEcoApp} $|$ \emph{React, TypeScript, Tailwind CSS} $|$ \href{https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/}{\underline{Case Study}} / \href{https://github.com/rinadsinger08-ui/portfolio/blob/main/projects/dewaecoapp/source/App.tsx}{\underline{Code}}}
-    {Dec 2024 -- Jun 2025}
-    \resumeItemListStart
-      \resumeItem{Originated the DEWA points concept: reward sustainable-labelled purchases or substitutes and reductions in monthly water or electricity use, measured by comparing utility bills.}
-      \resumeItem{Built a React and TypeScript water-consumption calculator with typed product records, interactive data entry, and monthly, annual, and five-year cost comparisons for the DIDI Competition.}
-      \resumeItem{Prototyped receipt and retailer reward flows with simulated data; documented the rewards concept and implementation boundaries in a public case study.}
-    \resumeItemListEnd
+    \resumeProjectHeading
+      {\textbf{McGill Autonomous Delivery Platform} $|$ \emph{C++}}{Sep. 2026 -- Present}
+      \resumeItemListStart
+        \resumeItem{Developing an early-stage C++ platform for potential autonomous food delivery at McGill, with planned Dijkstra's/A* routing, delivery scheduling, and simulated robot dispatch}
+      \resumeItemListEnd
 
-  \resumeProjectHeading
-    {\textbf{DressAway} $|$ \emph{JavaScript, Code.org Game Lab} $|$ \href{https://studio.code.org/projects/gamelab/8239b43c-1b5f-4b86-bd29-2550f4b3c619}{\underline{Demo}} / \href{https://github.com/rinadsinger08-ui/portfolio/blob/main/projects/legacy/dressaway/main.js}{\underline{Code}}}
-    {Dec 2024}
-    \resumeItemListStart
-      \resumeItem{Built a two-stage game with keyboard and mouse input, collision detection, scoring, health, and randomized spawning; changed mechanics and environments as player score increased.}
-    \resumeItemListEnd
-\resumeSubHeadingListEnd
+    \resumeProjectHeading
+      {\textbf{\href{https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/app/}{DEWAEcoApp}} $|$ \emph{React, TypeScript, JavaScript}}{Dec. 2024 -- Oct. 2026}
+      \resumeItemListStart
+        \resumeItem{Designed a sustainability rewards concept; built a React/TypeScript product comparator with typed records and monthly, annual, and five-year water-use cost calculations}
+        \resumeItem{Expanded into a live web demo with water and electricity bill comparisons, photo-assisted document review, and hypothetical conservation-point scoring}
+        \resumeItem{Added test cases for scoring and unit conversion; documented mock product data and unverified retailer/DEWA integrations}
+      \resumeItemListEnd
+
+    \resumeProjectHeading
+      {\textbf{\href{https://github.com/rinadsinger08-ui/portfolio/blob/main/projects/legacy/dressaway/main.js}{DressAway}} $|$ \emph{JavaScript, Code.org Game Lab} $|$ \href{https://studio.code.org/projects/gamelab/8239b43c-1b5f-4b86-bd29-2550f4b3c619}{\underline{Demo}}}{Dec. 2024}
+      \resumeItemListStart
+        \resumeItem{Built a JavaScript game with keyboard movement, mouse-based clothing collection, collision detection, scoring, health, and randomized target spawning}
+        \resumeItem{Added a second stage at 50 points, doubling horizontal movement speed and changing the background, obstacles, and collectible clothing}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
 
 %-----------EXPERIENCE-----------
 \section{Experience}
-\resumeSubHeadingListStart
-  \resumeSubheading
-    {Research Intern}{Mar 2025 -- Jun 2025}
-    {World Systems Solutions (WSS)}{Dubai, UAE}
-    \resumeItemListStart
-      \resumeItem{Co-developed a proposed conflict-risk framework combining socioeconomic, environmental, political, and cultural indicators through CRI, pHarmony, and SPI mathematical prototypes.}
-      \resumeItem{Applied the framework to country-level case studies and synthesized findings into a research proposal and team presentation for the PHOENIX initiative.}
-    \resumeItemListEnd
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Research Intern}{Mar. 2025 -- June 2025}
+      {World Systems Solutions (WSS)}{Dubai, UAE}
+      \resumeItemListStart
+        \resumeItem{Researched conflict drivers and applications of artificial intelligence in crisis prediction and humanitarian response for the PHOENIX initiative}
+        \resumeItem{Designed mathematical prototypes combining socioeconomic, environmental, political, and cultural indicators to assess conflict risk, mediation potential, and long-term stability}
+        \resumeItem{Applied the proposed framework to country-level case studies and synthesized findings into a final research proposal and team presentation}
+      \resumeItemListEnd
 
-  \resumeSubheading
-    {Graphic Design Intern (Recurring Summers)}{Sep 2022 -- Sep 2025}
-    {Toucan}{Dubai, UAE}
-    \resumeItemListStart
-      \resumeItem{Designed digital and print assets, translated project requirements into layouts, and refined designs through iterative feedback.}
-    \resumeItemListEnd
-\resumeSubHeadingListEnd
+    \resumeSubheading
+      {Graphic Design Intern}{Sept. 2022 -- Sept. 2025}
+      {Toucan}{Dubai, UAE}
+      \resumeItemListStart
+        \resumeItem{Designed digital and print assets, translated project requirements into layouts, and refined designs through iterative feedback, with attention to visual hierarchy and clear communication}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
 
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Python, JavaScript, C++, TypeScript, HTML, CSS} \\
+     \textbf{Frameworks \& Libraries}{: React, Tailwind CSS, Lucide React} \\
+     \textbf{Developer Tools}{: Git, GitHub Actions, GitHub Pages, Code.org Game Lab} \\
+     \textbf{Testing}{: Node.js test runner, Playwright} \\
+     \textbf{Concepts}{: Data Structures \& Algorithms}
+    }}
+ \end{itemize}
+
+%-------------------------------------------
 \end{document}
