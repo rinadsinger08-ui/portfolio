@@ -39,8 +39,8 @@ function sortedBills(){return [...state.bills].sort((a,b)=>a.month.localeCompare
 function renderDashboard(){
  const b=sortedBills(),latest=b[b.length-1],previous=b[b.length-2];
  $('stat-water').textContent=latest?number(latest.water)+' m³':'—';$('stat-power').textContent=latest?number(latest.energy)+' kWh':'—';
- $('stat-water-sub').textContent=latest?monthText(latest.month)+' · tracked manually':'No bills recorded';
- $('stat-power-sub').textContent=latest?monthText(latest.month)+' · tracked manually':'No bills recorded';
+ $('stat-water-sub').textContent=latest?monthText(latest.month)+' · scanned · unverified':'No bills recorded';
+ $('stat-power-sub').textContent=latest?monthText(latest.month)+' · scanned · unverified':'No bills recorded';
  if(!latest){$('usage-bars').innerHTML='<div class="empty"><b>No trend yet</b>Add monthly records to see how your usage changes.</div>';$('comparison-box').innerHTML='<div class="empty"><b>Start with two months</b>Percent changes appear after two tracked billing periods.</div>';}
  else{
  const last=b.slice(-6),maximum=Math.max(0.001,...last.map(x=>x.water));
@@ -51,7 +51,7 @@ function renderDashboard(){
  $('comparison-box').innerHTML='<p class="help">'+esc(monthText(previous.month))+' vs '+esc(monthText(latest.month))+(adjacent?'':' · Not consecutive months')+'</p>'+comparisonLine('Water',latest.water,previous.water,'m³')+comparisonLine('Electricity',latest.energy,previous.energy,'kWh')+'<p class="footnote mt">Changes reflect entered values and may be affected by billing-period length or occupancy. No rewards are issued.</p>';
  }
  }
- $('bill-history').innerHTML=b.length?'<div class="tablewrap"><table class="table"><thead><tr><th>Month</th><th>Water (m³)</th><th>Energy (kWh)</th><th>Costs</th><th></th></tr></thead><tbody>'+b.slice().reverse().map(x=>'<tr><td>'+esc(monthText(x.month))+'</td><td>'+number(x.water)+'</td><td>'+number(x.energy)+'</td><td>'+ (x.waterCost===null&&x.energyCost===null?'—':money((x.waterCost||0)+(x.energyCost||0)))+'</td><td><button class="btn danger small" data-delbill="'+esc(x.id)+'">Remove</button></td></tr>').join('')+'</tbody></table></div>':'<div class="empty"><b>Nothing here yet</b>Add a bill from the button above or use Scan & Review to organize a document.</div>';
+ $('bill-history').innerHTML=b.length?'<div class="tablewrap"><table class="table"><thead><tr><th>Month</th><th>Water (m³)</th><th>Energy (kWh)</th><th>Costs</th><th></th></tr></thead><tbody>'+b.slice().reverse().map(x=>'<tr><td>'+esc(monthText(x.month))+' <span class="badge '+(x.source==='scan'?'amber':'gray')+'">'+(x.source==='scan'?'Scanned · unverified':'Legacy manual')+'</span></td><td>'+number(x.water)+'</td><td>'+number(x.energy)+'</td><td>'+ (x.waterCost===null&&x.energyCost===null?'—':money((x.waterCost||0)+(x.energyCost||0)))+'</td><td><button class="btn danger small" data-delbill="'+esc(x.id)+'">Remove</button></td></tr>').join('')+'</tbody></table></div>':'<div class="empty"><b>Nothing here yet</b>Add a bill from the button above or use Scan & Review to organize a document.</div>';
 }
 const searchLink=(s,retailer)=>retailer==='amazon'?'https://www.amazon.ae/s?k='+encodeURIComponent(s):'https://www.carrefouruae.com/mafuae/en/search?q='+encodeURIComponent(s);
 function usage(product,uses){return product.rate*uses}
@@ -98,13 +98,7 @@ function detect(text,type){const clean=text.replace(/[, ](?=\d{3}\b)/g,'');let m
 }
 function init(){
  document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
- $('show-bill-form').onclick=()=>{$('bill-form-card').hidden=false;$('bill-month').focus()};
- $('hide-bill-form').onclick=()=>{$('bill-form-card').hidden=true};
- $('bill-month').value=new Date().toISOString().slice(0,7);
- $('bill-form').addEventListener('submit',e=>{e.preventDefault();const month=$('bill-month').value,water=validNum($('bill-water').value),energy=validNum($('bill-energy').value),wc=$('bill-water-cost').value===''?null:validNum($('bill-water-cost').value),ec=$('bill-energy-cost').value===''?null:validNum($('bill-energy-cost').value);
- if(!/^\d{4}-\d{2}$/.test(month)||water===null||energy===null||($('bill-water-cost').value!==''&&wc===null)||($('bill-energy-cost').value!==''&&ec===null)){$('bill-message').textContent='Please enter a valid month and nonnegative usage values.';return}
- if(state.bills.some(b=>b.month===month)){$('bill-message').textContent='That month already exists. Remove it before entering a replacement.';return}
- state.bills.push({id:uuid(),month,water,energy,waterCost:wc,energyCost:ec});persist();$('bill-form').reset();$('bill-form-card').hidden=true;renderDashboard()});
+ $('show-bill-form').onclick=()=>{showView('scan');$('document-type').value='bill';$('document-file').focus()};
  $('clear-bills').onclick=()=>{if(state.bills.length&&confirm('Delete all locally saved tracking records?')){state.bills=[];persist();renderDashboard()}};
  $('bill-history').addEventListener('click',e=>{const btn=e.target.closest('[data-delbill]');if(btn){state.bills=state.bills.filter(x=>x.id!==btn.dataset.delbill);persist();renderDashboard()}});
  $('category-tabs').addEventListener('click',e=>{const btn=e.target.closest('[data-cat]');if(btn){state.category=btn.dataset.cat;state.selections=[];$('product-search').value='';persist();renderProducts()}});
@@ -140,7 +134,14 @@ function init(){
  if(state.documents.some(d=>d.hash===hash)){message.textContent='This exact image was already saved on this device.';return}
  if(type==='bill'&&identifier&&state.documents.some(d=>d.type==='bill'&&d.identifier===identifier&&d.period===$('doc-month').value)){message.textContent='A bill from this account and month is already saved.';return}
  if(type==='receipt'&&identifier&&state.documents.some(d=>d.type==='receipt'&&d.identifier===identifier&&d.merchant.toLowerCase()===$('doc-merchant').value.trim().toLowerCase())){message.textContent='This receipt identifier already exists for the merchant.';return}
- state.documents.push({id:uuid(),hash,type,identifier,period:$('doc-month').value,water,energy,total,merchant:$('doc-merchant').value.trim(),created:new Date().toISOString(),status:'unverified'});persist();$('document-form').reset();$('document-file').value='';$('document-text').value='';$('ocr-status').textContent='';message.textContent='Review details saved locally. No points were awarded.';renderDocuments();
+ const period=$('doc-month').value;
+ if(type==='bill'&&state.bills.some(b=>b.month===period)){message.textContent='A bill for this month is already on your dashboard. Remove it there before replacing it.';return}
+ const docId=uuid();
+ state.documents.push({id:docId,hash,type,identifier,period,water,energy,total,merchant:$('doc-merchant').value.trim(),created:new Date().toISOString(),status:'unverified'});
+ if(type==='bill')state.bills.push({id:uuid(),month:period,water,energy,waterCost:null,energyCost:null,source:'scan',documentId:docId});
+ persist();$('document-form').reset();$('document-file').value='';$('document-text').value='';$('ocr-status').textContent='';
+ message.textContent=type==='bill'?'Scanned bill added to tracking history as UNVERIFIED. Zero points awarded.':'Receipt review saved locally as UNVERIFIED. Zero points awarded.';
+ renderDocuments();if(type==='bill'){renderDashboard();showView('dashboard')}
  });
  $('document-type').addEventListener('change',()=>{$('document-text').value='';$('document-message').textContent=''});
  $('document-text').addEventListener('change',()=>detect($('document-text').value,$('document-type').value));
