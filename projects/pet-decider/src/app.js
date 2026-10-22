@@ -68,8 +68,24 @@ function renderResults(next) {
   $('results-summary').textContent = next.matches.length ? `${next.matches.length} option${next.matches.length === 1 ? '' : 's'} meet your inputs in this model. Select two or more to compare.` : 'No options meet all your inputs in this model. Review the reasons below before changing your plans.';
   if (!next.matches.length) {
     const empty = node('div', undefined, 'empty-state no-match');
-    empty.append(node('h3', 'No suitable match right now'), node('p', 'Consider waiting, researching further, or volunteering with animals while you plan. The app will not suggest an animal that fails one of your constraints.'));
+    empty.append(node('h3', 'No full matches for these inputs'), node('p', 'This four-option demo uses illustrative time and budget minimums. Even with housing permission and backup care confirmed, a setup budget below CAD 250 or fewer than 30 minutes/day excludes every option. See the closest alternatives below.'));
     container.append(empty);
+    const nearby = node('section', undefined, 'closest-options');
+    nearby.append(node('h3', 'Closest options to explore'), node('p', 'These are not matches. Each option below shows exactly which modeled requirements were not met.'));
+    const closest = [...next.excluded].sort((a, b) => a.blockers.length - b.blockers.length || a.pet.id.localeCompare(b.pet.id, 'en')).slice(0, 3);
+    for (const { pet, blockers } of closest) {
+      const card = node('article', undefined, 'closest-option');
+      const heading = node('div', undefined, 'closest-heading');
+      const illustration = node('img'); illustration.src = pet.icon; illustration.alt = ''; illustration.width = 36; illustration.height = 36;
+      heading.append(illustration, node('h4', pet.name), node('span', 'Not a match', 'closest-status'));
+      card.append(heading, node('p', pet.summary), node('strong', 'What would need to change:'));
+      const list = node('ul');
+      for (const blocker of blockers) list.append(node('li', blocker));
+      card.append(list);
+      const source = node('a', 'Research care requirements'); source.href = pet.source; source.target = '_blank'; source.rel = 'noopener noreferrer';
+      card.append(source); nearby.append(card);
+    }
+    container.append(nearby);
   }
   next.matches.forEach(({ pet, reasons }, index) => {
     const card = node('article', undefined, 'pet-card');
