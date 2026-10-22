@@ -1,14 +1,14 @@
 {
-  "name": "dewaecoapp-review-build",
+  "name": "dewaecoapp-react-hybrid",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.4.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "node tests/validate.cjs",
+    "test": "node tests/validate.cjs && node tests/conservation.test.cjs",
     "typecheck": "tsc -b"
   },
   "dependencies": {
