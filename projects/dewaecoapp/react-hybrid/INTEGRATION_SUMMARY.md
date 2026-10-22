@@ -1,20 +1,27 @@
-# DEWAEcoApp — October 21 source integration
+# DEWAEcoApp hybrid — engineering notes
 
-## Recovered historical files
-- `reference/original-water-consumption/src/App.tsx`: original two-tab Bolt product finder + manual water calculator, simulated rewards.
-- `reference/original-water-consumption/src/components/ProductDiscovery.tsx`: 2-product comparison/recommendations and retailer search links.
-- `reference/original-water-consumption/src/data/catalog.ts`: historical illustrative US catalog (17 entries, not a verified live inventory).
+## What belongs where
 
-## Integrated app screens
-1. Dashboard: manually tracked water/electricity usage; estimated rewards only, no issuance.
-2. Eco Products: existing UAE 15-example discovery, side-by-side comparison, retailer search links, manual fallback. New **To calculator** button sends a product into an editable shared scenario.
-3. Water Calculator: recovered multi-product calculator concept, now using category-specific L/min, L/flush or L/cycle, AED purchase prices and AED/m³ water-tariff assumptions. Highlights lowest water use and lowest five-year cost, including ties. Persists product entries locally.
-4. Scan & Review: image OCR on bills/receipts, reviewed fields and local pending-review records; does not award points. Photos themselves are not retained.
+- [Interactive live demo](../app/) — published build-free JavaScript implementation, browser-tested for navigation, product comparison, calculator, and camera navigation.
+- [React + TypeScript source](./) — typed, modular React implementation reflecting the same overall concept, supplied as source and **not** presented as the deployed build.
+- [Historical original water-consumption files](reference/original-water-consumption/) — archived snapshots, including original React `App.tsx`, Product Discovery and catalog, preserved for provenance.
 
-## Verification performed in this environment
-`NODE_PATH=/opt/nvm/versions/node/v22.16.0/lib/node_modules npm test` passed: TypeScript/TSX syntactic transpilation, bill unit conversion, receipt/bill parsing, manual scenario calculations, validation and five-year costs.
+## Main components
 
-**Not verified:** npm package installation, full TypeScript semantic type checking, Vite production build or a real browser scan, because dependencies could not be installed. This ZIP is **source code**, not an uploadable Netlify Drop build. Install dependencies and build the `dist` folder first.
+`src/App.tsx` — React navigation and product transfer into calculator.  
+`src/components/Dashboard.tsx` — camera-first entrypoint, recent usage, charts, and simulated points panel.  
+`src/components/EvidenceCenter.tsx` — browser image OCR, review fields, local document tracking.  
+`src/context/BillContext.tsx` — typed month-to-month bill tracking.  
+`src/utils/conservationPoints.ts` — pure function calculating hypothetical rewards, isolated from any redeemable ledger.  
+`src/components/ProductDiscovery.tsx` and `WaterCalculator.tsx` — discovery, usage/cost estimates, and comparisons.
 
-## Important gaps
-The system is NOT connected to DEWA, Amazon order-history APIs, or Carrefour customer accounts. The local pending-review documents are not verified by a trusted server. No exchangeable points, actual bills, real orders, or officially certified products are represented. Do not launch a live rewards program without backend, credentials, legal agreements, consent and review controls.
+## Verification
+
+- TypeScript syntax transcription tests pass (22 files).
+- Water conversion and cost scenario checks pass.
+- Nine hypothetical scoring scenarios pass (same account, consecutive months, December rollover, each utility independently, and ineligible records).
+- Full React build/typecheck and production browser testing require installing npm dependencies, unavailable in the current build environment. The live static app remains the stable published frontend.
+
+## Boundaries
+
+No official DEWA integration, live retailer order verification, fraud-proof identity checks, redeemable rewards, or production database. The product list is illustrative. Evidence data is local-only and unverified.
