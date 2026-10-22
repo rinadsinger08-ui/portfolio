@@ -20,7 +20,7 @@ async function submit(page){await page.getByRole('button',{name:'Explore my matc
  await page.goto(url);
  await submit(page);assert.equal(await page.locator('[aria-invalid=true]').count(),9);assert.equal(await page.locator('#form-errors').isVisible(),true);
  console.log('PASS empty form shows accessible field errors');
- await fill(page);await submit(page);assert.equal(await page.locator('.pet-card').count(),4);assert.equal(await page.locator('.pet-card h3').first().textContent(),'Adult dog');
+ await fill(page);await submit(page);assert.equal(await page.locator('.pet-card').count(),4);assert.equal(await page.locator('.pet-card h3').first().textContent(),'Dog');
  assert.equal(await page.locator('#history-list .history-card').count(),1);
  console.log('PASS valid profile renders ranked matches and saves history');
  await page.getByRole('checkbox').nth(0).check();await page.getByRole('checkbox').nth(1).check();assert.equal(await page.locator('#comparison').isVisible(),true);assert.equal(await page.locator('thead th').count(),3);
@@ -31,7 +31,7 @@ async function submit(page){await page.getByRole('button',{name:'Explore my matc
  console.log('PASS history deduplicates, persists, and restores complete profiles');
  await page.locator('#minutes').fill('0');assert.equal(await page.locator('.pet-card').count(),0);await submit(page);assert.equal(await page.locator('.no-match').count(),1);assert.equal(await page.locator('#history-list .history-card').count(),2);
  console.log('PASS edits invalidate stale matches and zero yields explicit no-match');
- await fill(page,{allergies:'yes'});await submit(page);assert.equal(await page.locator('.pet-card').count(),1);assert.equal(await page.locator('.pet-card h3').textContent(),'Freshwater aquarium');
+ await fill(page,{allergies:'yes'});await submit(page);assert.equal(await page.locator('.pet-card').count(),3);
  await fill(page,{housing:'no'});await submit(page);assert.equal(await page.locator('.no-match').count(),1);
  console.log('PASS allergy preference and housing restrictions are enforced in UI');
  await page.getByRole('button',{name:'Reset answers'}).click();assert.equal(await page.locator('#minutes').inputValue(),'');assert.equal(await page.locator('.pet-card').count(),0);assert.equal(await page.locator('#history-list .history-card').count(),4);
@@ -49,13 +49,14 @@ async function submit(page){await page.getByRole('button',{name:'Explore my matc
  await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:qaDir+'/pet-desktop.png',fullPage:true});
  await fill(page,{space:'small',minutes:'10',monthly:'40',setup:'100',housing:'yes',backup:'yes',allergies:'no'});
  await submit(page);
- assert.equal(await page.locator('.no-match').count(),1);
- assert.equal(await page.locator('.closest-option').count(),3);
- assert.ok((await page.locator('.closest-option').first().textContent()).includes('What would need to change'));
+ assert.equal(await page.locator('.no-match').count(),0);
+ assert.equal(await page.locator('.pet-card').count(),4);
+ assert.ok((await page.locator('.pet-cautions').count())>0);
+ assert.ok((await page.locator('.pet-cautions').first().textContent()).includes('Things to plan for'));
  await page.getByRole('button',{name:'Try a sample profile'}).click();
- assert.equal(await page.locator('.pet-card').count(),3);
+ assert.equal(await page.locator('.pet-card').count(),4);
  assert.equal(await page.locator('.closest-option').count(),0);
- console.log('PASS constrained yes/yes profile shows detailed near matches; sample profile shows three matches');
+ console.log('PASS low-resource yes/yes profile yields varied suggestions and cautions; sample yields four options');
  await page.goto(origin+'/');assert.equal(await page.locator('.featured').getByRole('link',{name:'Try the app'}).count(),1);assert.equal(await page.getByRole('link',{name:'Resume ↗',exact:true}).count(),1);assert.equal(await page.getByRole('link',{name:'Case study',exact:true}).count(),1);
  await page.screenshot({path:qaDir+'/portfolio-desktop.png',fullPage:true});
  await page.setViewportSize({width:375,height:812});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:qaDir+'/portfolio-mobile.png',fullPage:true});

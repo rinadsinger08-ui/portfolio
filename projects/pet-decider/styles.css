@@ -85,3 +85,8 @@ thead { background: var(--accent-pale); }
 .closest-option p { color: var(--muted); }
 .closest-option ul { padding-left: 20px; line-height: 1.6; }
 .closest-option a { display: inline-block; margin-top: 8px; }
+
+.pet-photo { width: 100%; height: 176px; object-fit: cover; border-radius: 6px; margin: 12px 0; display:block; background:var(--accent-pale); }
+.pet-cautions { margin-top: 12px; padding: 12px; background: #fff3e8; border-radius: 6px; font-size: .82rem; }
+.pet-cautions ul { margin: 8px 0 0; padding-left: 19px; line-height: 1.65; }
+.pet-icon img { width: 50px; height: 50px; object-fit: cover; border-radius: 50%; }

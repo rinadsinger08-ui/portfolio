@@ -56,7 +56,7 @@ function resetResults() {
   $('results-summary').textContent = 'Answer the questions to explore up to four options.';
   const empty = node('div', undefined, 'empty-state');
   const icon = node('span', '✳'); icon.setAttribute('aria-hidden', 'true');
-  empty.append(icon, node('h3', 'Good matches take thought.'), node('p', 'We consider your resources first, then rank the remaining options by activity and experience.'), node('p', 'Sometimes the right result is to wait.'));
+  empty.append(icon, node('h3', 'Good matches take thought.'), node('p', 'We rank a wider range of animal categories by your answers and show the planning tradeoffs for each.'), node('p', 'Sometimes the right result is to wait.'));
   $('results').replaceChildren(empty);
 }
 
@@ -64,19 +64,19 @@ function renderResults(next) {
   result = next; selected.clear();
   const container = $('results'); container.replaceChildren();
   $('comparison').hidden = true; $('comparison-table').replaceChildren();
-  $('results-title').textContent = next.matches.length ? 'A few paths to explore.' : 'Give it a little more time.';
-  $('results-summary').textContent = next.matches.length ? `${next.matches.length} option${next.matches.length === 1 ? '' : 's'} meet your inputs in this model. Select two or more to compare.` : 'No options meet all your inputs in this model. Review the reasons below before changing your plans.';
+  $('results-title').textContent = next.matches.length ? 'Explore your strongest starting points.' : 'More planning needed first.';
+  $('results-summary').textContent = next.matches.length ? `${next.matches.length} options to research, ranked by your preferences and resources—not guaranteed suitable pets. Review any cautions and select two or more to compare.` : 'Housing permission, available care time, or both budgets currently prevent a recommendation. See the reasons below.';
   if (!next.matches.length) {
     const empty = node('div', undefined, 'empty-state no-match');
-    empty.append(node('h3', 'No full matches for these inputs'), node('p', 'This four-option demo uses illustrative time and budget minimums. Even with housing permission and backup care confirmed, a setup budget below CAD 250 or fewer than 30 minutes/day excludes every option. See the closest alternatives below.'));
+    empty.append(node('h3', 'No full matches for these inputs'), node('p', 'This happens when housing permission is unconfirmed, daily care time is zero, or both budgets are zero. Otherwise we suggest animal categories to research, showing any planning gaps rather than automatically excluding them.'));
     container.append(empty);
     const nearby = node('section', undefined, 'closest-options');
-    nearby.append(node('h3', 'Closest options to explore'), node('p', 'These are not matches. Each option below shows exactly which modeled requirements were not met.'));
+    nearby.append(node('h3', 'Closest options to explore'), node('p', 'These are not recommendations. The reasons below explain what needs resolving before considering a pet.'));
     const closest = [...next.excluded].sort((a, b) => a.blockers.length - b.blockers.length || a.pet.id.localeCompare(b.pet.id, 'en')).slice(0, 3);
     for (const { pet, blockers } of closest) {
       const card = node('article', undefined, 'closest-option');
       const heading = node('div', undefined, 'closest-heading');
-      const illustration = node('img'); illustration.src = pet.icon; illustration.alt = ''; illustration.width = 36; illustration.height = 36;
+      const illustration = node('img'); illustration.src = pet.icon; illustration.alt = ''; illustration.width = 36; illustration.height = 36; illustration.addEventListener('error', () => { illustration.src = pet.fallbackIcon; }, {once:true});
       heading.append(illustration, node('h4', pet.name), node('span', 'Not a match', 'closest-status'));
       card.append(heading, node('p', pet.summary), node('strong', 'What would need to change:'));
       const list = node('ul');
@@ -91,15 +91,27 @@ function renderResults(next) {
     const card = node('article', undefined, 'pet-card');
     const top = node('div', undefined, 'pet-card-top');
     const icon = node('span', undefined, 'pet-icon'); icon.setAttribute('aria-hidden', 'true');
-    const illustration = node('img'); illustration.src = pet.icon; illustration.alt = ''; icon.append(illustration);
-    const title = node('div'); title.append(node('p', `OPTION ${String(index + 1).padStart(2, '0')}`, 'eyebrow'), node('h3', pet.name));
-    top.append(icon, title); card.append(top, node('p', pet.summary));
+    const illustration = node('img'); illustration.src = pet.icon; illustration.alt = ''; illustration.addEventListener('error', () => { illustration.src = pet.fallbackIcon; }, {once:true}); icon.append(illustration);
+    const title = node('div'); title.append(node('p', `OPTION ${String(index + 1).padStart(2, '0')} · ${next.matches[index].cautions.length ? 'NEEDS PLANNING' : 'WITHIN MODEL ESTIMATES'}`, 'eyebrow'), node('h3', pet.name));
+    top.append(icon, title); card.append(top);
+    const photo = node('img', undefined, 'pet-photo');
+    photo.src = pet.icon; photo.alt = `Original Code.org photograph representing ${pet.name}`;
+    photo.loading = 'lazy';
+    photo.addEventListener('error', () => { photo.src = pet.fallbackIcon; }, { once:true });
+    card.append(photo, node('p', pet.summary));
     const metrics = node('div', undefined, 'metrics');
     metrics.append(node('span', `${pet.minutes} min/day`), node('span', `$${pet.monthly}/month`), node('span', `$${pet.setup} setup`));
     card.append(metrics, node('small', 'Illustrative planning assumptions · CAD', 'assumption-label'));
     const list = node('ul', undefined, 'reasons');
     for (const reason of reasons) list.append(node('li', reason));
     card.append(list);
+    if (next.matches[index].cautions.length) {
+      const warning = node('div', undefined, 'pet-cautions');
+      warning.append(node('strong', 'Things to plan for:'));
+      const list = node('ul');
+      for (const caution of next.matches[index].cautions) list.append(node('li', caution));
+      warning.append(list); card.append(warning);
+    }
     const details = node('details'); details.append(node('summary', 'What to research next'), node('p', pet.care));
     const source = node('a', 'Read the RSPCA care guide ↗'); source.href = pet.source;
     details.append(source); card.append(details);
@@ -114,7 +126,7 @@ function renderResults(next) {
   });
   if (next.excluded.length) {
     const details = node('details', undefined, 'excluded');
-    details.append(node('summary', `Why ${next.excluded.length} other option${next.excluded.length === 1 ? ' was' : 's were'} excluded`));
+    details.append(node('summary', `Why ${next.excluded.length} other option${next.excluded.length === 1 ? ' was' : 's were'} not shortlisted`));
     for (const { pet, blockers } of next.excluded) {
       details.append(node('h3', pet.name));
       const list = node('ul'); for (const blocker of blockers) list.append(node('li', blocker)); details.append(list);
@@ -158,7 +170,7 @@ function renderHistory() {
     const current = recommend(entry.profile);
     const card = node('article', undefined, 'history-card');
     const description = node('div');
-    description.append(node('h3', current.matches.length ? current.matches.map(match => match.pet.name).join(' · ') : 'No suitable match'));
+    description.append(node('h3', current.matches.length ? current.matches.map(match => match.pet.name).join(' · ') : 'No research suggestions'));
     description.append(node('p', `${entry.profile.space} space · ${entry.profile.minutes} min/day · CAD ${entry.profile.monthly}/month · CAD ${entry.profile.setup} setup`));
     description.append(node('small', new Date(entry.savedAt).toLocaleString('en-CA')));
     const button = node('button', 'Revisit ↗', 'secondary'); button.type = 'button';
