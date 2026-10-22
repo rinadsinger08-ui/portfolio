@@ -192,6 +192,12 @@ form.addEventListener('reset', () => {
 });
 $('clear-history').addEventListener('click', () => { $('clear-confirm').hidden = false; $('confirm-clear').focus(); });
 $('cancel-clear').addEventListener('click', () => { $('clear-confirm').hidden = true; $('clear-history').focus(); });
+$('try-example').addEventListener('click', () => {
+  const example = {space:'medium',minutes:'90',monthly:'150',setup:'600',housing:'yes',allergies:'no',activity:'moderate',experience:'first',backup:'yes'};
+  for (const [key, value] of Object.entries(example)) $(key).value = value;
+  clearErrors();
+  form.requestSubmit();
+});
 $('confirm-clear').addEventListener('click', () => {
   history = []; const warning = clearHistory(storage);
   $('storage-status').textContent = warning || 'Saved profiles cleared.';
