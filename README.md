@@ -2,7 +2,7 @@
 
 Computer Science student at McGill University, expected 2028. Seeking Summer 2027 software development, front-end, and software testing internships.
 
-**Stack:** JavaScript · React · TypeScript · Tailwind CSS · HTML · CSS · Python (current coursework)
+**Stack:** JavaScript · React · TypeScript · Tailwind CSS · HTML · CSS · Python
 
 [Portfolio](https://rinadsinger08-ui.github.io/portfolio/) · [Resume](https://rinadsinger08-ui.github.io/portfolio/resume/) · [LinkedIn](https://www.linkedin.com/in/rinad-singer/) · [Contact](mailto:rinadsinger08@gmail.com)
 
