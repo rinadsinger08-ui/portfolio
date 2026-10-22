@@ -29,15 +29,45 @@ if(!Array.isArray(state.selections))state.selections=[];
 if(!state.scenarios||typeof state.scenarios!=='object')state.scenarios={};
 if(!CATS[state.category])state.category='showerheads';
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{notify('Storage unavailable; changes may not persist.')}}
-function notify(message){$('bill-message').textContent=message}
+function notify(message){const target=$('document-message');if(target)target.textContent=message}
 function validNum(value){if(value===''||value===null||!Number.isFinite(Number(value))||Number(value)<0)return null;return Number(value)}
 function monthText(s){if(!/^\d{4}-\d{2}$/.test(s))return s;return new Date(s+'-02T12:00:00').toLocaleDateString('en-AE',{month:'short',year:'numeric'})}
 function fmtPercent(a,b){if(b===0)return null;return (a-b)/b*100}
 function comparisonLine(kind,now,before,unit){const p=fmtPercent(now,before);if(p===null)return '<div class="listline">'+esc(kind)+': previous usage was zero; percentage unavailable</div>';const lower=p<0;return '<div class="listline between"><div><b>'+esc(kind)+'</b><p class="help">'+number(before)+' → '+number(now)+' '+esc(unit)+'</p></div><span class="badge '+(p>0?'amber':'')+'">'+(p===0?'No change':(lower?'↓ ':'↑ ')+number(Math.abs(p))+'%')+'</span></div>'}
 function showView(view){if(!['dashboard','products','calculator','scan'].includes(view))view='dashboard';state.view=view;document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id==='view-'+view));document.querySelectorAll('.nav-btn').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.view===view)));persist();if(view==='dashboard')renderDashboard();if(view==='products')renderProducts();if(view==='calculator')renderCalculator();if(view==='scan')renderDocuments()}
 function sortedBills(){return [...state.bills].sort((a,b)=>a.month.localeCompare(b.month))}
+
+/* Illustrative program-design rule only. Real credits require official utility verification and a secure server. */
+const CONCEPT_POINTS_PER_REDUCED_UTILITY=10;
+function previousMonthKey(month){
+ if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(month))return null;
+ const [y,m]=month.split('-').map(Number),d=new Date(Date.UTC(y,m-2,1));
+ return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0');
+}
+function conceptPoints(){
+ // A demonstration calculation, NOT a points ledger. Recompute from unique, photo-imported
+ // records with matching entered account identifiers and consecutive billing months.
+ // Changing browser storage or editing photos can fake these values; no real benefit is issued.
+ const scans=state.bills.filter(b=>b.source==='scan'&&typeof b.identifier==='string'&&b.identifier.trim()&&
+  typeof b.month==='string'&&Number.isFinite(b.water)&&Number.isFinite(b.energy)&&b.water>=0&&b.energy>=0);
+ const lookup=new Map();
+ scans.forEach(b=>{const key=b.identifier.trim().toLowerCase()+'|'+b.month;if(!lookup.has(key))lookup.set(key,b)});
+ const awards=scans.map(current=>{
+  const pm=previousMonthKey(current.month);
+  const previous=pm?lookup.get(current.identifier.trim().toLowerCase()+'|'+pm):null;
+  if(!previous)return null;
+  const waterSaved=Math.max(0,previous.water-current.water),energySaved=Math.max(0,previous.energy-current.energy);
+  return {billId:current.id,month:current.month,waterSaved,energySaved,
+   waterPoints:waterSaved>0?CONCEPT_POINTS_PER_REDUCED_UTILITY:0,
+   energyPoints:energySaved>0?CONCEPT_POINTS_PER_REDUCED_UTILITY:0};
+ }).filter(Boolean);
+ return {total:awards.reduce((s,a)=>s+a.waterPoints+a.energyPoints,0),awards};
+}
+
 function renderDashboard(){
- const b=sortedBills(),latest=b[b.length-1],previous=b[b.length-2];
+ const b=sortedBills(),latest=b[b.length-1],previous=b[b.length-2],concept=conceptPoints();
+ $('stat-concept-points').textContent=number(concept.total);
+ $('stat-concept-sub').textContent=concept.awards.length?concept.awards.length+' eligible month-to-month comparison(s) · simulated only':'Requires two consecutive scanned bills for the same entered account';
  $('stat-water').textContent=latest?number(latest.water)+' m³':'—';$('stat-power').textContent=latest?number(latest.energy)+' kWh':'—';
  $('stat-water-sub').textContent=latest?monthText(latest.month)+' · scanned · unverified':'No bills recorded';
  $('stat-power-sub').textContent=latest?monthText(latest.month)+' · scanned · unverified':'No bills recorded';
@@ -48,7 +78,17 @@ function renderDashboard(){
  if(!previous){$('comparison-box').innerHTML='<div class="empty"><b>One month recorded</b>Add another month to view the change.</div>';}
  else{
  const mi=new Date(previous.month+'-02T12:00:00');mi.setMonth(mi.getMonth()+1);const adjacent=mi.toISOString().slice(0,7)===latest.month;
- $('comparison-box').innerHTML='<p class="help">'+esc(monthText(previous.month))+' vs '+esc(monthText(latest.month))+(adjacent?'':' · Not consecutive months')+'</p>'+comparisonLine('Water',latest.water,previous.water,'m³')+comparisonLine('Electricity',latest.energy,previous.energy,'kWh')+'<p class="footnote mt">Changes reflect entered values and may be affected by billing-period length or occupancy. No rewards are issued.</p>';
+ const credit=concept.awards.find(a=>a.billId===latest.id);
+ const rewardCopy=credit?
+  '<div class="result mt"><b>✦ '+number(credit.waterPoints+credit.energyPoints)+' hypothetical DEWAEcoApp points</b>'+
+  (credit.waterPoints?'Water use fell by '+number(credit.waterSaved)+' m³ (+10 concept points). ':'No water-reduction points. ')+
+  (credit.energyPoints?'Electricity fell by '+number(credit.energySaved)+' kWh (+10 concept points).':'No electricity-reduction points.')+
+  '</div>':
+  '<div class="callout mt">Concept points require two consecutive monthly bill photos associated with the same entered account number. This comparison does not qualify.</div>';
+ $('comparison-box').innerHTML='<p class="help">'+esc(monthText(previous.month))+' vs '+esc(monthText(latest.month))+(adjacent?'':' · Not consecutive months')+'</p>'+
+ comparisonLine('Water',latest.water,previous.water,'m³')+
+ comparisonLine('Electricity',latest.energy,previous.energy,'kWh')+rewardCopy+
+ '<p class="footnote mt">Comparison uses the reported consumption values, not the bill amount. Photos and account identifiers are not independently authenticated. Concept points are illustrative and never redeemable.</p>';
  }
  }
  $('bill-history').innerHTML=b.length?'<div class="tablewrap"><table class="table"><thead><tr><th>Month</th><th>Water (m³)</th><th>Energy (kWh)</th><th>Costs</th><th></th></tr></thead><tbody>'+b.slice().reverse().map(x=>'<tr><td>'+esc(monthText(x.month))+' <span class="badge '+(x.source==='scan'?'amber':'gray')+'">'+(x.source==='scan'?'Scanned · unverified':'Legacy manual')+'</span></td><td>'+number(x.water)+'</td><td>'+number(x.energy)+'</td><td>'+ (x.waterCost===null&&x.energyCost===null?'—':money((x.waterCost||0)+(x.energyCost||0)))+'</td><td><button class="btn danger small" data-delbill="'+esc(x.id)+'">Remove</button></td></tr>').join('')+'</tbody></table></div>':'<div class="empty"><b>Nothing here yet</b>Add a bill from the button above or use Scan & Review to organize a document.</div>';
@@ -126,11 +166,11 @@ function init(){
  $('document-form').addEventListener('submit',async e=>{e.preventDefault();const f=$('document-file').files[0],type=$('document-type').value,message=$('document-message');message.textContent='';
  if(!f){message.textContent='Attach a photo before saving an evidence record.';return}
  if(!['image/jpeg','image/png','image/webp'].includes(f.type)||f.size>5*1024*1024){message.textContent='Choose a JPG, PNG, or WEBP image under 5 MB.';return}
- const water=$('doc-water').value===''?null:validNum($('doc-water').value),energy=$('doc-electricity').value===''?null:validNum($('doc-electricity').value),total=$('doc-total').value===''?null:validNum($('doc-total').value);
+ const water=$('doc-water').value===''?null:validNum($('doc-water').value),energy=$('doc-electricity').value===''?null:validNum($('doc-electricity').value),total=$('doc-total').value===''?null:validNum($('doc-total').value),identifier=$('doc-identifier').value.trim();
  if(($('doc-water').value!==''&&water===null)||($('doc-electricity').value!==''&&energy===null)||($('doc-total').value!==''&&total===null)){message.textContent='Please correct negative or invalid values.';return}
- if(type==='bill'&&(!$('doc-month').value||water===null||energy===null)){message.textContent='For a bill, review the billing month, water m³ and electricity kWh.';return}
+ if(type==='bill'&&(!identifier||!$('doc-month').value||water===null||energy===null)){message.textContent='For a bill, review its account number, billing month, water m³ and electricity kWh. An account number is needed to compare the same household.';return}
  if(type==='receipt'&&!$('doc-merchant').value.trim()){message.textContent='For a receipt, enter the merchant name.';return}
- const hash=await fingerprint(f);const identifier=$('doc-identifier').value.trim();
+ const hash=await fingerprint(f);
  if(state.documents.some(d=>d.hash===hash)){message.textContent='This exact image was already saved on this device.';return}
  if(type==='bill'&&identifier&&state.documents.some(d=>d.type==='bill'&&d.identifier===identifier&&d.period===$('doc-month').value)){message.textContent='A bill from this account and month is already saved.';return}
  if(type==='receipt'&&identifier&&state.documents.some(d=>d.type==='receipt'&&d.identifier===identifier&&d.merchant.toLowerCase()===$('doc-merchant').value.trim().toLowerCase())){message.textContent='This receipt identifier already exists for the merchant.';return}
@@ -138,9 +178,9 @@ function init(){
  if(type==='bill'&&state.bills.some(b=>b.month===period)){message.textContent='A bill for this month is already on your dashboard. Remove it there before replacing it.';return}
  const docId=uuid();
  state.documents.push({id:docId,hash,type,identifier,period,water,energy,total,merchant:$('doc-merchant').value.trim(),created:new Date().toISOString(),status:'unverified'});
- if(type==='bill')state.bills.push({id:uuid(),month:period,water,energy,waterCost:null,energyCost:null,source:'scan',documentId:docId});
+ if(type==='bill')state.bills.push({id:uuid(),month:period,water,energy,waterCost:null,energyCost:null,source:'scan',documentId:docId,identifier});
  persist();$('document-form').reset();$('document-file').value='';$('document-text').value='';$('ocr-status').textContent='';
- message.textContent=type==='bill'?'Scanned bill added to tracking history as UNVERIFIED. Zero points awarded.':'Receipt review saved locally as UNVERIFIED. Zero points awarded.';
+ message.textContent=type==='bill'?'Bill recorded as UNVERIFIED. Any simulated points are hypothetical, not redeemable.':'Receipt saved locally as UNVERIFIED. No purchase points are issued.';
  renderDocuments();if(type==='bill'){renderDashboard();showView('dashboard')}
  });
  $('document-type').addEventListener('change',()=>{$('document-text').value='';$('document-message').textContent=''});
