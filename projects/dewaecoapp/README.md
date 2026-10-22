@@ -1,43 +1,36 @@
 # DEWAEcoApp
 
-React / TypeScript sustainability prototype developed for the DIDI Design Competition, December 2024–June 2025.
+A sustainability web project originally developed for the DIDI Design Competition (December 2024–June 2025), exploring practical ways to reduce household water/electricity use and compare efficient products.
 
-[Project case study](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/) · [Restored calculator source](source/) · [Live utility dashboard (sample data)](https://utility-bill-trackin-92l7.bolt.host/)
+**[Try the interactive application](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/app/)** · **[Project case study](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/)** · **[Published app source](app/)** · **[Original React calculator source](source/)**
 
-## Sustainability rewards concept
+## Features available in the interactive app
 
-The proposed app gives users two ways to earn DEWA points:
+- **Photo-first utility tracking:** on mobile, choose the camera to photograph a bill. OCR attempts to extract relevant information, after which the user reviews bill month, water in cubic metres, and energy in kWh. The extracted readings can populate the dashboard and consumption trends.
+- **Monthly comparisons:** calculates absolute and percentage changes, with a zero-denominator guard.
+- **Eco product comparison:** explore explicitly fictitious example products and compare purchase price, consumption, monthly water cost, and estimated five-year ownership cost; launch retailer search pages.
+- **Water calculator:** manage custom product comparisons with water usage expressed appropriately in litres per minute, per flush, or per cycle, and edit use frequency and water-price assumptions.
+- **Purchase receipt review:** photograph a receipt, attempt OCR, and save a local evidence-review record.
+- **Local storage:** save or remove tracking and review records in the browser, with exact-file and identifier-based duplicate detection on the local device.
 
-- **Sustainable purchases:** sign in and buy sustainable-labelled products or recommended sustainable substitutes through participating retailers to earn points.
-- **Reduced utility use:** scan a water or electricity bill and compare its consumption with the previous month's bill. A decrease in water or electricity usage earns points.
+## Accuracy and safety boundaries
 
-This is the broader product concept. The recovered source contains simulated receipt and retailer flows; it does not establish working sign-in, purchase verification, bill scanning, month-to-month consumption comparison, or real DEWA point issuance.
+This is an **independent student project**, **not an official DEWA product or partnership**. **No redeemable DEWA points are issued**. Scanning text from a photo is not evidence that the document or the purchase is genuine; any real rewards platform requires identity verification, server-side controls, official utility/retailer authorization, transaction verification, and fraud review. No Amazon or Carrefour account credentials are requested or used by this release.
 
-## Two related prototypes
+The example catalog and its prices are illustrative rather than live or product-verified. The water cost model uses a user-editable illustrative AED/m³ variable tariff and does **not** predict full DEWA bills; actual bill amounts depend on slab pricing, surcharges, VAT, and other charges.
 
-**Product water-cost calculator:** the original React/TypeScript code and the subsequently supplied TypeScript helpers have been restored under `source/` with a Vite scaffold. Its interactive product comparison and reward simulations are implemented in the source; a new clean-install build has not yet been verified.
+Bill images are processed in the browser by an OCR library loaded on demand from a CDN. The original image is not saved by the app. LocalStorage is **not secure storage**; avoid using confidential bill or receipt data on a shared device. There is no backend authentication or user account system yet.
 
-**Utility Bill Tracker:** a separate Bolt-hosted dashboard displays example water and electricity consumption, monthly comparisons, trends, conservation points, and tips. It is publicly viewable, but the displayed data is sample data; no working bill upload or direct integration between these prototypes has been verified.
+## Architecture
 
-## What is inspectable
+- `app/`: public static HTML, CSS and JavaScript client, deployed through GitHub Pages without a build step
+- `source/`: the original React / TypeScript water calculator plus supporting project setup
+- The separately published Bolt Utility Tracker informed the user-interface and tracking workflow, but the public static preview is not the same codebase as that Bolt deployment
 
-The original `App.tsx` snapshot implements an interactive water-consumption calculator: add, edit, and remove products; update daily usage and water price; compare monthly, annual, and five-year costs. It uses typed product records and React state.
+## Prior technical work
 
-The cost model assumes 30 days per month and 12 months per year. Flow rates are gallons per minute; the rate is USD per gallon. These are prototype assumptions, not live utility tariffs.
+Original React/TypeScript prototypes included stateful product entry, recommendation cards, monthly/annual/five-year cost comparisons, simulated receipt matching and simulated retailer account status. The current public preview replaces the unsafe automatic rewards behavior with explicitly unverified document review.
 
-## Prototype boundaries
+## Future production integration
 
-- Receipt scanning is a text prompt that **simulates** a scan; it does not implement OCR, a camera, or a receipt-upload service.
-- Amazon and Carrefour connection buttons toggle local UI state. They do not authenticate or connect real retailer accounts.
-- Purchase checks use `['Example Purchase']`, not a retailer API.
-- The proposed utility-bill comparison and points for reduced monthly water/electricity use are not implemented in the recovered `App.tsx` snapshot.
-- The originally missing `./types` and `./utils/dweaPoints` have now been supplied and restored with a Vite project scaffold. Build success has not yet been independently verified.
-- Product labels do not have explicit input associations, and numeric inputs rely on HTML `min` values without complete validation. These are known limitations, not finished accessibility or validation claims.
-
-## Contribution and deliverable
-
-Originated the DEWA points rewards concept: sustainable-labelled purchases or recommended substitutes earn points, and scanned utility bills are compared month to month to reward reduced water or electricity consumption. Built the React / TypeScript calculator interface, cost comparisons, and state-driven product interactions, and prototyped receipt and partner-account reward flows with simulated data. The case-study page distinguishes these implemented calculator features, the separately published utility dashboard, and the unimplemented real-world integrations.
-
-## Next work
-
-From `source/`, run `npm install`, then `npm run build` (production build) or `npm run dev` (local preview). These commands still need a clean-install verification. Improve numeric validation and input labels; replace mock verification only if a permitted integration becomes available.
+A real verified rewards service would need a private backend, authenticated accounts, secure document storage and deletion, server-controlled points ledger, reliable OCR, document fraud checks, retailer-approved catalog and order APIs, and DEWA partnership for bill verification and redemption. These integrations are **not included** in this public demo.
