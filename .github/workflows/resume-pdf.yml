@@ -1,0 +1,32 @@
+name: Publish resume PDF
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'resume/Rinad-Singer-Resume.tex'
+      - '.github/workflows/resume-pdf.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-resume:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Compile resume PDF
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: resume/Rinad-Singer-Resume.tex
+          work_in_root_file_dir: true
+      - name: Publish generated PDF
+        run: |
+          test -s resume/Rinad-Singer-Resume.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add resume/Rinad-Singer-Resume.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish updated resume PDF [skip ci]"
+            git push
+          fi

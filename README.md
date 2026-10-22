@@ -1,6 +1,6 @@
 # Rinad Singer · Projects
 
-Computer Science student at McGill University, expected May 2029. Seeking Summer 2027 software development, front-end, and software testing internships.
+Computer Science student at McGill University, expected 2028. Seeking Summer 2027 software development, front-end, and software testing internships.
 
 **Stack:** JavaScript · React · TypeScript · Tailwind CSS · HTML · CSS · Python (current coursework)
 
@@ -10,10 +10,10 @@ Computer Science student at McGill University, expected May 2029. Seeking Summer
 
 A standalone JavaScript web app rebuilt from my original App Lab project.
 
-- **Explore:** ranked pet options with an explanation for each result.
+- **Explore:** rankings across eight pet-care categories with explanations and planning cautions for each result.
 - **Compare:** time, budget assumptions, space, and care considerations side by side.
 - **Revisit:** up to 10 distinct profiles saved locally; no account required.
-- **Handle limits:** invalid inputs, insufficient resources, housing restrictions, furry-animal exclusions, unavailable storage, and no-match results.
+- **Handle limits:** validated inputs, explicit budget/time cautions, housing restrictions, furry-animal exclusions, unavailable storage, and genuine no-match results.
 
 [Try the web app](https://rinadsinger08-ui.github.io/portfolio/projects/pet-decider/) · [Source](projects/pet-decider/src/) · [Tests](projects/pet-decider/tests/) · [Model & limitations](projects/pet-decider/README.md) · [Original App Lab source](projects/legacy/pet-decider/main.js)
 
@@ -21,9 +21,9 @@ The matching model uses explicit planning assumptions, not AI or a guarantee of 
 
 ## DEWAEcoApp
 
-React / TypeScript sustainability prototype with interactive product entry and monthly, annual, and five-year water-cost comparisons. The proposed rewards model gives DEWA points for sustainable-labelled purchases or substitutes, and for lower water/electricity consumption compared with the previous month's bill. Receipt and retailer flows are simulated; bill comparison and real point issuance are not established by the recovered source.
+React / TypeScript sustainability prototype with interactive product entry and monthly, annual, and five-year water-cost comparisons. The deployed independent JavaScript demo supports photo-assisted document review, monthly utility comparisons, product cost calculations, and hypothetical DEWA-inspired conservation points. Rewards are simulated, not issued or redeemable; there is no official DEWA or retailer integration.
 
-[Case study](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/) · [Source snapshot](projects/dewaecoapp/source/App.tsx)
+[Live demo](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/app/) · [Case study](https://rinadsinger08-ui.github.io/portfolio/projects/dewaecoapp/) · [React/TypeScript source](projects/dewaecoapp/react-hybrid/) · [Live JavaScript source](projects/dewaecoapp/app/)
 
 ## Earlier projects
 
@@ -55,4 +55,4 @@ npm run test:browser
 
 [Portfolio website](https://rinadsinger08-ui.github.io/portfolio/) · [Source archive notes](projects/legacy/README.md)
 
-GitHub Actions runs both matching/storage tests and browser regression checks. The constraint sweep checks 1,512 input profiles within one test, not 1,512 separate tests. Node.js is used for tests and local static serving; Pet Decider has no Node backend.
+GitHub Actions runs both matching/storage tests and browser regression checks. The regression sweep checks 1,512 input profiles within one test, not 1,512 separate tests. Node.js is used for tests and local static serving; Pet Decider has no Node backend.
