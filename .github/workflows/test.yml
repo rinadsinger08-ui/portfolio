@@ -1,7 +1,23 @@
 name: Pet Decider checks
 on:
   push:
+    paths:
+      - 'projects/pet-decider/**'
+      - 'browser-tests/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'playwright.config.js'
+      - '.github/workflows/test.yml'
   pull_request:
+    paths:
+      - 'projects/pet-decider/**'
+      - 'browser-tests/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'playwright.config.js'
+      - '.github/workflows/test.yml'
 permissions:
   contents: read
 jobs:
