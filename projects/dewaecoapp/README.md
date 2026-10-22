@@ -7,7 +7,7 @@ A sustainability web project originally developed for the DIDI Design Competitio
 ## Features available in the interactive app
 
 - **Photo-first utility tracking:** on mobile, choose the camera to photograph a bill. OCR attempts to extract relevant information, after which the user reviews bill month, water in cubic metres, and energy in kWh. The extracted readings can populate the dashboard and consumption trends.
-- **Monthly comparisons:** calculates absolute and percentage changes, with a zero-denominator guard.
+- **Monthly comparisons and concept points:** compares photo-imported records from two consecutive billing months under the same entered account number. Lower water consumption earns **+10 hypothetical points** and lower electricity consumption earns **+10 hypothetical points**. No change or an increase earns zero for that category. This is a demonstration scoring rule, not a DEWA policy. Calculates percent changes with a zero-denominator guard.
 - **Eco product comparison:** explore explicitly fictitious example products and compare purchase price, consumption, monthly water cost, and estimated five-year ownership cost; launch retailer search pages.
 - **Water calculator:** manage custom product comparisons with water usage expressed appropriately in litres per minute, per flush, or per cycle, and edit use frequency and water-price assumptions.
 - **Purchase receipt review:** photograph a receipt, attempt OCR, and save a local evidence-review record.
@@ -15,7 +15,7 @@ A sustainability web project originally developed for the DIDI Design Competitio
 
 ## Accuracy and safety boundaries
 
-This is an **independent student project**, **not an official DEWA product or partnership**. **No redeemable DEWA points are issued**. Scanning text from a photo is not evidence that the document or the purchase is genuine; any real rewards platform requires identity verification, server-side controls, official utility/retailer authorization, transaction verification, and fraud review. No Amazon or Carrefour account credentials are requested or used by this release.
+This is an **independent student project**, **not an official DEWA product or partnership**. **No redeemable DEWA points are issued.** The preview displays only **simulated DEWAEcoApp concept points** if the comparison rule is met; no verification, redemption or real point balance exists. Scanning text from a photo is not evidence that the document or the purchase is genuine; any real rewards platform requires identity verification, server-side controls, official utility/retailer authorization, transaction verification, and fraud review. No Amazon or Carrefour account credentials are requested or used by this release.
 
 The example catalog and its prices are illustrative rather than live or product-verified. The water cost model uses a user-editable illustrative AED/m³ variable tariff and does **not** predict full DEWA bills; actual bill amounts depend on slab pricing, surcharges, VAT, and other charges.
 
@@ -29,7 +29,7 @@ Bill images are processed in the browser by an OCR library loaded on demand from
 
 ## Prior technical work
 
-Original React/TypeScript prototypes included stateful product entry, recommendation cards, monthly/annual/five-year cost comparisons, simulated receipt matching and simulated retailer account status. The current public preview replaces the unsafe automatic rewards behavior with explicitly unverified document review.
+Original React/TypeScript prototypes included stateful product entry, recommendation cards, monthly/annual/five-year cost comparisons, simulated receipt matching and simulated retailer account status. The current public preview replaces unsafe automatic redeemable rewards with unverified document review and a separate **calculated hypothetical points display**. Concept points are recalculated from recorded bill readings, not awarded as real credits. They are easily manipulated because the app cannot verify photos or account ownership.
 
 ## Future production integration
 
